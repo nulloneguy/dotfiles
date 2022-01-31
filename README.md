@@ -1,3 +1,9 @@
+<style>
+    table {
+        width: 100%;
+    }
+</style>
+
 # Dotfiles
 ## System configuration
 
@@ -54,9 +60,3 @@
 | W-p                         | toggle polybar           |
 | W-A-l                       | lock screen              |
 | XF86AudioKeys               | I think you understand   |
-
-<style>
-    table {
-        width: 100%;
-    }
-</style>
