@@ -1,7 +1,5 @@
 ### Set wallpapers
 
-# using hsetroot
-
 ```bash
 #using hsetroot
 hsetroot -fill <path-to-img>
