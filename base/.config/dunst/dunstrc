@@ -2,21 +2,21 @@
   monitor = 0
   follow = mouse
   shrink = no
-  padding = 20
-  horizontal_padding = 20
+	  padding = 20
+  horizontal_padding = 15
 
   width = 0
   height = 450
   offset = 25x43
   origin = top-right
 
-  frame_width = 6
+  frame_width = 2
   separator_height = 5
-  frame_color = "#151D25"
+  frame_color = "#B5B4C9"
   separator_color = "#151D25"
 
   sort = no
-  font = Clear sans 8
+  font = JetBrainsMono Nerd Font 8
   markup = full
   format = "<b>%s</b>\n%b"
   alignment = left
@@ -33,23 +33,23 @@
   history_length = 6
   title = Dunst
   class = Dunst
-  corner_radius = 5
+  corner_radius = 0
 
   mouse_left_click = close_current
   mouse_middle_click = do_action
   mouse_right_click = close_all
 
 [urgency_low]
-  background = "#11171D"
+  background = "#151515"
   foreground = "#A8A8A8"
   timeout = 5
 
 [urgency_normal]
-  background = "#11171D"
+  background = "#151515"
   foreground = "#DCDDDE"
   timeout = 10
 
 [urgency_critical]
-  background = "#11171D"
+  background = "#151515"
   foreground = "#F28FAD"
   timeout = 20
