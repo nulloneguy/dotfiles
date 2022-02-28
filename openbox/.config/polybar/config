@@ -1,0 +1,167 @@
+[colors]
+background = #ffffff
+foreground = #000000
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[bar/main]
+override-redirect = false
+enable-ipc = true
+fixed-center = true
+bottom = false
+locale = ru_RU.UTF-8
+
+height = 20
+width = 100%
+
+offset-y = 0
+padding = 1
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = "Iosevka Mayukai Original:style=Bold:pixelsize=10;2:antialias=false"
+font-1 = "Siji:size=12;2:antialias=false"
+
+modules-left = cpu memory title
+modules-center = workspaces
+modules-right = network battery alsa date
+
+module-margin = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+tray = true
+tray-position = right
+
+;------------------
+
+[module/title]
+type = internal/xwindow
+format-padding = 1
+label = "%title:0:35:...%"
+label-maxlen = 35
+
+;------------------
+
+[module/network]
+type = internal/network
+interface = wlan0
+interval = 5.0
+
+# format-connected = "<ramp-signal> <label-connected>"
+format-connected = " <label-connected>"
+format-packetloss = <animation-packetloss>
+label-connected =  %essid% %signal%%
+
+;------------------
+
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+# password = mysecretpassword
+interval = 2
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next>
+label-offline =  mpd off
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-play-foreground = ${colors.accent}
+icon-pause-foreground = ${colors.accent}
+icon-stop-foreground = ${colors.accent}
+icon-prev-foreground = ${colors.accent}
+icon-next-foreground = ${colors.accent}
+
+;------------------
+
+[module/date]
+type = internal/date
+interval = 1.0
+date = %d-%m-%Y%
+time = %H:%M
+date-alt = %A, %d %B %Y
+time-alt = %H:%M:%S %A, %d %B %Y
+
+format =  <label>
+label = %time%
+
+;------------------
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = <label>
+label =  %percentage%%
+
+;------------------
+
+[module/memory]
+type = internal/memory
+interval = 1
+format = <label>
+label =  %gb_used%
+
+;------------------
+
+
+[module/alsa]
+type = internal/alsa
+format-volume = <label-volume>
+format-muted =  0%
+format-volume-prefix = " "
+format-volume-prefix-foreground = ${colors.accent}
+
+;------------------
+
+[module/workspaces]
+type = internal/xworkspaces
+pin-workspaces = true
+icon-default = 
+format = <label-state>
+# format-padding = 5
+label-active = %icon%
+label-active-padding = 1
+label-active-foreground = #000000
+
+label-occupied = %icon%
+label-occupied-foreground = ${colors.foreground}
+label-occupied-padding = 1
+
+label-urgent = %icon%
+label-urgent-padding = 1
+label-urgent-foreground = ${colors.foreground}
+
+label-empty = 
+label-empty-padding = 1
+label-empty-foreground = ${colors.foreground}
+
+;------------------
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 95
+
+format-charging = <label-charging>
+format-charging-foreground = ${colors.foreground}
+format-charging-prefix = " "
+format-charging-prefix-foreground = ${colors.foreground}
+
+format-discharging = <label-discharging>
+format-discharging-foreground = ${colors.foreground}
+format-discharging-prefix = " "
+format-discharging-prefix-foreground = ${colors.foreground}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground}
+format-full-foreground = ${colors.foreground}
