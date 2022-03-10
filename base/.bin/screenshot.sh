@@ -1,37 +1,76 @@
-#!/usr/bin/env sh
-export LC_ALL='POSIX' LANG='POSIX'
+#!/usr/bin/env bash
 
-maimselect="maim -s --noopengl --capturebackground --hidecursor"
-maimfull="maim --noopengl --capturebackground --hidecursor"
-tempfile="/tmp/screenshot-$(date +%Y%m%d_%H%M%S).png"
+## Copyright (C) 2020-2021 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
 
-notification() {
-  # Check if users cancel the screenshot
-  if [ ! -f "$tempfile" ]; then
-    dunstify "Screenshot Failed 﫞 " "Screenshot are canceled by user"
-    exit 1
-  else
-    dunstify -i "$tempfile" "Screenshot  " "Screenshot captured and copied to clipboard!"
-  fi
+## Script to take screenshots with maim
+
+time=`date +%Y-%m-%d-%I-%M-%S`
+geometry=`xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`
+dir="`xdg-user-dir PICTURES`/Screenshots"
+file="Screenshot_${time}_${geometry}.png"
+
+# notify
+notify_user () {
+	if [[ -e "$dir/$file" ]]; then
+		dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dunst/picture.png "Saved in $dir"
+	else
+		dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dunst/picture.png "Screenshot Deleted."
+	fi
 }
 
-case $1 in
-  area)
-    $maimselect -s "$tempfile" && xclip -selection c -t image/png < "$tempfile"
+# countdown
+countdown () {
+	for sec in `seq $1 -1 1`; do
+		dunstify -t 1000 --replace=699 -i /usr/share/archcraft/icons/dunst/timer.png "Taking shot in : $sec"
+		sleep 1
+	done
+}
 
-    notification &
+# take shots
+shotnow () {
+	cd ${dir} && maim -u -f png "$file" && viewnior ${dir}/"$file"
+	notify_user
+}
 
-    sleep 1
-    rm "$tempfile"
-    ;;
+shot5 () {
+	countdown '5'
+	sleep 1 && cd ${dir} && maim -u -f png "$file" && viewnior ${dir}/"$file"
+	notify_user
+}
 
-  full)
-    $maimfull "$tempfile" && xclip -selection c -t image/png < "$tempfile"
-    notification &
+shot10 () {
+	countdown '10'
+	sleep 1 && cd ${dir} && maim -u -f png "$file" && viewnior ${dir}/"$file"
+	notify_user
+}
 
-    sleep 1
-    rm "$tempfile"
-    ;;
-esac
+shotwin () {
+	cd ${dir} && maim -u -f png -i `xdotool getactivewindow` "$file" && viewnior ${dir}/"$file"
+	notify_user
+}
 
-exit ${?}
+shotarea () {
+	cd ${dir} && maim -u -f png -s -b 2 -c 0.35,0.55,0.85,0.25 -l "$file" && viewnior ${dir}/"$file"
+	notify_user
+}
+
+if [[ ! -d "$dir" ]]; then
+	mkdir -p "$dir"
+fi
+
+if [[ "$1" == "--now" ]]; then
+	shotnow
+elif [[ "$1" == "--in5" ]]; then
+	shot5
+elif [[ "$1" == "--in10" ]]; then
+	shot10
+elif [[ "$1" == "--win" ]]; then
+	shotwin
+elif [[ "$1" == "--area" ]]; then
+	shotarea
+else
+	echo -e "Available Options : --now --in5 --in10 --win --area"
+fi
+
+exit 0
