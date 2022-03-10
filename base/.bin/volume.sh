@@ -15,7 +15,7 @@ is_mute() {
 send_notification() {
   volume=$(get_volume)
 
-  bar=$(seq -s "#" 0 $((volume / 5)) | sed 's/[0-9]//g')
+  bar=$(seq -s "━" 0 $((volume / 5)) | sed 's/[0-9]//g')
   if [ "$volume" -eq 0 ]; then
     dunstify -i "$DIR/volume-muted.svg" -r 2593 -u normal "Audio Muted!"
   elif [ "$volume" -lt 20 ]; then
