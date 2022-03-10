@@ -8,7 +8,7 @@
     <focusNew>yes</focusNew>
     <!-- always try to focus new windows when they appear. other rules do
        apply -->
-    <followMouse>no</followMouse>
+    <followMouse>yes</followMouse>
     <!-- move focus to a window when you move the mouse into it -->
     <focusLast>yes</focusLast>
     <!-- focus the last used window when changing desktops, instead of the one
@@ -40,7 +40,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>xui</name>
+    <name>Clearlooks</name>
     <cornerRadius>4</cornerRadius>
     <cornerRadius menu="yes">4</cornerRadius>
     <titleLayout/>
@@ -300,16 +300,6 @@
         <command>search</command>
       </action>
     </keybind>
-    <keybind key="A-space">
-      <action name="Execute">
-        <command>ob_jgmenu</command>
-      </action>
-    </keybind>
-    <keybind key="W-Tab">
-      <action name="Execute">
-        <command>skippy-xd</command>
-      </action>
-    </keybind>
     <!-- <keybind key="A-Tab">
       <action name="NextWindow">
         <dialog>icons</dialog>
@@ -374,7 +364,7 @@
     </keybind>
     <keybind key="A-m">
       <action name="Execute">
-        <command>kitty -e ncmpcpp</command>
+        <command>kitty -e ncmpcpp -c ~/.ncmpcpp/config-art</command>
       </action>
     </keybind>
     <keybind key="A-n">
@@ -404,12 +394,22 @@
     </keybind>
     <keybind key="Print">
       <action name="Execute">
-        <command>~/.bin/screenshot.sh full</command>
+        <command>~/.bin/screenshot.sh --now</command>
+      </action>
+    </keybind>
+    <keybind key="S-Print">
+      <action name="Execute">
+        <command>~/.bin/screenshot.sh --in5</command>
       </action>
     </keybind>
     <keybind key="W-Print">
       <action name="Execute">
-        <command>~/.bin/screenshot.sh area</command>
+        <command>~/.bin/screenshot.sh --win</command>
+      </action>
+    </keybind>
+    <keybind key="A-Print">
+      <action name="Execute">
+        <command>~/.bin/screenshot.sh --area</command>
       </action>
     </keybind>
     <keybind key="A-d">
