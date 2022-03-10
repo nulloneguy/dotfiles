@@ -1,11 +1,16 @@
 #!/usr/bin/sh
 
 sh ~/.config/polybar/launch.sh &
-picom -b &
-hsetroot -fill ~/.wall/white.png &
+#picom -b &
+hsetroot -fill ~/.wal/white.png &
 setxkbmap -layout us,ru -option "grp:alt_shift_toggle,grp_led:scroll" &
 alttab -fg "#9baec8" -bg "#161720" -frame "#5a74ca" -t 128x128 -i 128x48 -d 2 -theme Qogir-dark -font "xft:ClearSansMedium:size=9:antialias=false" -pk "Left" -nk "Right" &
 dunst -config $HOME/.config/dunst/dunstrc &
 gnome-keyring-daemon --start --components=pkcs11 &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-xfce4-power-manager &
+xfce4-power-manager --daemon &
+xset r rate 200 55 &
+
+(sleep 3; caffeine) &
+(sleep 3; blueman-applet) &
+(sleep 3; kotatogram-desktop) &
